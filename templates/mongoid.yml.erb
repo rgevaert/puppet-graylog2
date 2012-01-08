@@ -1,0 +1,27 @@
+# Use environment variables
+production:
+  host: <%= mongodb_host %>
+  port: 27017
+  username: <%= mongodb_user %>
+  password: <%= mongodb_password %>
+  database: <%= mongodb_database %>
+
+# or specify values manually
+# production:
+#   host: localhost
+#   port: 27017
+#   username:
+#   password:
+#   database: graylog2
+
+
+# Values below are for development and testing.
+# You may comment out them or just ignore.
+
+development:
+  host: localhost
+  database: graylog2_development
+
+test:
+  host: localhost
+  database: graylog2_test
