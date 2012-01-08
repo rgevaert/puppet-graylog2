@@ -1,0 +1,48 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          graylog2-server
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts graylog2-server
+# Description:       Starts graylog2-server using start-stop-daemon
+### END INIT INFO
+
+GLS_HOME=/opt/graylog2-server
+DAEMON="/usr/bin/java"
+DAEMON_OPTS=" -jar $GLS_HOME/graylog2-server.jar"
+NAME=graylog2-server
+DESC=graylog2-server
+PID_FILE=/tmp/graylog2.pid
+LOG_DIR=/var/log/$NAME
+NOHUP=`which nohup`
+
+
+test -x $DAEMON || exit 0
+
+set -e
+
+case "$1" in
+  start)
+    echo -n "Starting $DESC: "
+    cd /tmp
+    $NOHUP $DAEMON $DAEMON_OPTS &
+    ;;
+  stop)
+    echo "Stopping $DESC: "
+    pkill -f graylog2-server.jar
+    ;;
+  restart|force-reload)
+    ${0} stop
+    sleep 0.5
+    ${0} start
+    ;;
+  *)
+    N=/etc/init.d/$NAME
+    echo "Usage: $N {start|stop|restart|force-reload}" >&2
+    exit 1
+    ;;
+esac
+
+exit 0
