@@ -15,9 +15,14 @@ class graylog2::server ( $mongodb_user = "grayloguser", $mongodb_password, $mong
                           $elasticsearch_host = "127.0.0.1" ) {
 
   include graylog2::server::pre
+  include graylog2::server::install
   include graylog2::server::config
+  include graylog2::server::service
   
   Class['graylog2::server::pre'] ->
-    Class['graylog2::server::config']
+    Class['graylog2::server::install'] ->
+    Class['graylog2::server::config'] ->
+    Class['graylog2::server::service']
 
+  Class['graylog2::server::config'] ~> Class['graylog2::server::service']
 }

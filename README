@@ -35,10 +35,19 @@ rgevaert/mongodb        https://github.com/rgevaert/puppet-mongodb
 rgevaert/elasticsearch  https://github.com/rgevaert/puppet-elasticsearch
 
 
-Configuration
+Configuration mongodb user
 -------------
 
-* mongodb: create the mongodb user 'grayloguser' and use the password.
+* mongodb:
+  Create the mongodb user 'grayloguser' and use the password.
+  http://www.mongodb.org/display/DOCS/Security+and+Authentication#SecurityandAuthentication-ConfiguringAuthenticationandSecurity
+
+  > use admin
+  > db.addUser("theadmin", "anadminpassword")
+  > db.auth("theadmin", "anadminpassword")
+  > use graylog2
+  > db.addUser('grayloguser','xyz')
+
 
 How to create the Debian packages
 ---------------------------------
