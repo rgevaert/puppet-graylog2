@@ -1,12 +1,15 @@
 class graylog2::server::pre
 {
-  class {
-    'mongodb::server':
-      auth => true;
+  if( $mongodb_host == "127.0.0.1")
+  {
+    class {
+      'mongodb::server':
+        auth => true;
+    }
   }
 
-  package {
-    'openjdk-6-jre':
-      ensure => present;
+  if( $elasticsearch_host == "127.0.0.1")
+  {
+    include elasticsearch
   }
 }
