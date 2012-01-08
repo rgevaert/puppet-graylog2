@@ -13,6 +13,14 @@ gray2log-server:
       mongodb_password => 'xxx';
   }
 
+or with mongodb and/or elasticsearch on different host
+
+  class {
+    'graylog2::server':
+      mongodb_password   => 'xxx',
+      mongodb_host       => 'a.b.c.d',
+      elasticsearch_host => 'e.f.g.h',
+  }
 
 gray2log-web-interface:
 
@@ -27,11 +35,10 @@ rgevaert/mongodb        https://github.com/rgevaert/puppet-mongodb
 rgevaert/elasticsearch  https://github.com/rgevaert/puppet-elasticsearch
 
 
-Further configuration
----------------------
+Configuration
+-------------
 
 * mongodb: create the mongodb user 'grayloguser' and use the password.
-
 
 How to create the Debian packages
 ---------------------------------
