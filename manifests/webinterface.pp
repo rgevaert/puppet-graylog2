@@ -1,16 +1,7 @@
-class graylog2::webinterface
+class graylog2::webinterface( $mongodb_user = "grayloguser", $mongodb_password, $mongodb_host = "127.0.0.1", $mongodb_database = "graylog2")
 {
-#  $packages = ['ruby1.8','libopenssl-ruby','ruby-dev','ruby','rubygems']
+  include graylog2::webinterface::install
+  include graylog2::webinterface::config
 
-#  package {
-#    $packages:
-#      ensure => installed;
-#  }
-
-  file {
-    '/opt/graylog2-web-interface-0.9.6':
-      source  => 'puppet:///modules/graylog2/graylog2-web-interface-0.9.6',
-      recurse => true,
-      ensure  => directory;
-  }
+  Class['graylog2::webinterface::install'] -> Class['graylog2::webinterface::config']
 }

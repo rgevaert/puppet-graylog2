@@ -24,7 +24,13 @@ or with mongodb and/or elasticsearch on different host
 
 gray2log-web-interface:
 
-  include graylog2::webinterface
+  class {
+    'graylog2::webinterface':
+      mongodb_password => 'xxx';
+    'graylog2::webinterface::apache':
+  }
+
+Including the apache subclass is optional.  You can use your own apache class too.
 
 Dependancies
 ------------
@@ -69,12 +75,12 @@ Download the graylog2-web-interface and get it extracted to /opt/graylog2-web-in
 
 Install bundle and make:
 
-  gem install bundle
   apt-get install make
+  gem install bundle
 
 Install the necessary gems in the vendor/bundle subdir
 
-  /opt/graylog2-web-interface# bundle install --path vendor/bundle
+  /opt/graylog2-web-interface# bundle install --local
 
 Create the Debian package.  E.g. with fpm:
   fpm -n graylog2-web-interface -v 0.9.6 -d ruby1.8 -d rake -d ruby-dev  -a all \ 
