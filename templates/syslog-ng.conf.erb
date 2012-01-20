@@ -1,0 +1,8 @@
+# Forward all logs to Graylog2
+# Replace 0.0.0.0 with your own Graylog2 server IP
+destination graylog2 { udp(<%= graylog2_server %>); };
+log {
+        source(s_all);
+        filter(f_at_least_info);
+        destination(graylog2);
+};
