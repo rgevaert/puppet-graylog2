@@ -1,5 +1,6 @@
 <VirtualHost *:80>
     DocumentRoot /opt/graylog2-web-interface/public
+    SetEnv GEM_HOME /var/lib/gems/1.8/
 
     <Directory /opt/graylog2-web-interface/public>
         Allow from all
